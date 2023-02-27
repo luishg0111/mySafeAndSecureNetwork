@@ -1,0 +1,33 @@
+myssn INFO: connecting to 192.168.0.102 port 10000
+$ Hola
+myssn INFO: sending data: b'Hola'
+myssn INFO: encrypted message: b'Q\x18\xd7\x1fq\xee\xedQ-\xa5\x99/,)\x8f\x00'
+myssn INFO: tx crc32 = 1363261323, crc bytes = b'\x8b\xb7AQ'
+myssn DATA: b'Hola'
+DATA: b'Hola'
+$ Esto es una prueba de la aplicacion en modo servidor 
+myssn INFO: sending data: b'Esto es una prueba de la aplicacion en modo servidor '
+myssn INFO: encrypted message: b"\x0f-\xe6\xf2\xa7\xe8E\x8e\xd1(\xf7\x10\x8f\xa7+\xb5}>+o\x1e\x08oQ\xa1+\xab\xca4.&\xa4\xaepf\x17\x97\xaf\xa9\xe5\xcd\xbd\xe7\x85rM\x88\xd5\x1c\xb1\xacr\xc1\xb4\xb8G2'\xa9R\xce\xc4\xbd\xae"
+myssn INFO: tx crc32 = 3241783614, crc bytes = b'>\xb19\xc1'
+myssn DATA: b'Esto es una prueba de la aplicacion en modo servidor '
+DATA: b'Esto es una prueba de la aplicacion en modo servidor '
+$ Son pruebas de como se transmiten los mensajes
+myssn INFO: sending data: b'Son pruebas de como se transmiten los mensajes'
+myssn INFO: encrypted message: b'\x83\xbd\xd9\xba\xb1J\xc9\xa2\'\x9c\x16\xbf\xaa5\xc2\x8f5\xfet\xb7\xd0\x94\xffz\x18l\x89\xc9\xdc\xcd\x14tp\x05\x8f\xdb\xe9\xc0\x99NB"?U`\x9a{\xa3'
+myssn INFO: tx crc32 = 1403331582, crc bytes = b'\xfe#\xa5S'
+myssn DATA: b'Son pruebas de como se transmiten los mensajes'
+DATA: b'Son pruebas de como se transmiten los mensajes'
+$ Y esta funcionando bien 
+myssn INFO: sending data: b'Y esta funcionando bien '
+myssn INFO: encrypted message: b'\xb3\x10\xeb\xfaV\xffh\xe5)q\xdb\x02\x10m\xb3\xde\xdb\xcaSU\xf9U\xeeo\x032H\xf0\xcd\xd5\xaa<'
+myssn INFO: tx crc32 = 2334665060, crc bytes = b'd)(\x8b'
+myssn DATA: b'Y esta funcionando bien '
+DATA: b'Y esta funcionando bien '
+$ Esta es la evidencia 
+myssn INFO: sending data: b'Esta es la evidencia '
+myssn INFO: encrypted message: b't8\x9cE\x86J\x7f`E\xe6\xa6f\xf2\xbbw\x9c/S">\xa2\x0e\xc3 Z\\\xbf\x0bg\x9a\x03\xce'
+myssn INFO: tx crc32 = 2721361672, crc bytes = b'\x08\xaf4\xa2'
+myssn DATA: b'Esta es la evidencia '
+DATA: b'Esta es la evidencia '
+$ INFO: Client Exception
+INFO: Bye!

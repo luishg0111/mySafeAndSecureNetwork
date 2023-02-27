@@ -1,0 +1,100 @@
+Initializing PHY...
+
+************************************************
+ TCP Echo example
+************************************************
+ IPv4 Address     : 192.168.0.102
+ IPv4 Subnet mask : 255.255.255.0
+ IPv4 Gateway     : 192.168.0.100
+************************************************
+
+
+SECURE_MSG_DEBUG_INFO: Waiting for new connection 
+SECURE_MSG_DEBUG_INFO: Connection Accepted. Waiting for receive messages
+SECURE_MSG_DEBUG_INFO: This is the encrypted message with CRC 
+74980020241c01202f650100e01b0120cb610100
+
+SECURE_MSG_DEBUG_INFO: Getting body message bytes 
+SECURE_MSG_DEBUG_INFO: Getting CRC bytes 
+SECURE_MSG_DEBUG_INFO: Convert CRC bytes from the message to int 
+SECURE_MSG_DEBUG_INFO: Calculating CRC32
+SECURE_MSG_DEBUG_INFO: Checksum comparison
+SECURE_MSG_DEBUG_INFO: calculated checksum tx 1363261323 checksum bytes 5141b78b, Original checksum tx 1363261323 checksum bytes 5141b78b 
+SECURE_MSG_DEBUG_INFO: Checksum OK! Decrypting message...
+SECURE_MSG_DEBUG_INFO: Decrypting buffer on CBC mode...
+SECURE_MSG_DEBUG_INFO: Decrypted message completed 
+SECURE_MSG_DEBUG_INFO: Decrypted message: 
+
+Hola
+
+SECURE_MSG_DEBUG_INFO: Finished 
+SECURE_MSG_DEBUG_INFO: This is the encrypted message with CRC 
+74980020241c01202f650100e01b0120cb610100241c01202f650100141c012025e80000f81b0120a9d30000001c0120241c01204400000068980020101c0120ab620100
+
+SECURE_MSG_DEBUG_INFO: Getting body message bytes 
+SECURE_MSG_DEBUG_INFO: Getting CRC bytes 
+SECURE_MSG_DEBUG_INFO: Convert CRC bytes from the message to int 
+SECURE_MSG_DEBUG_INFO: Calculating CRC32
+SECURE_MSG_DEBUG_INFO: Checksum comparison
+SECURE_MSG_DEBUG_INFO: calculated checksum tx 3241783614 checksum bytes c139b13e, Original checksum tx 3241783614 checksum bytes c139b13e 
+SECURE_MSG_DEBUG_INFO: Checksum OK! Decrypting message...
+SECURE_MSG_DEBUG_INFO: Decrypting buffer on CBC mode...
+SECURE_MSG_DEBUG_INFO: Decrypted message completed 
+SECURE_MSG_DEBUG_INFO: Decrypted message: 
+
+Esto es una prueba de la aplicacion en modo servidor 
+
+SECURE_MSG_DEBUG_INFO: Finished 
+SECURE_MSG_DEBUG_INFO: This is the encrypted message with CRC 
+74980020241c01202f650100e01b0120cb610100241c01202f6501000000000000000000f81b0120a9d3000000000000241c0120
+
+SECURE_MSG_DEBUG_INFO: Getting body message bytes 
+SECURE_MSG_DEBUG_INFO: Getting CRC bytes 
+SECURE_MSG_DEBUG_INFO: Convert CRC bytes from the message to int 
+SECURE_MSG_DEBUG_INFO: Calculating CRC32
+SECURE_MSG_DEBUG_INFO: Checksum comparison
+SECURE_MSG_DEBUG_INFO: calculated checksum tx 1403331582 checksum bytes 53a523fe, Original checksum tx 1403331582 checksum bytes 53a523fe 
+SECURE_MSG_DEBUG_INFO: Checksum OK! Decrypting message...
+SECURE_MSG_DEBUG_INFO: Decrypting buffer on CBC mode...
+SECURE_MSG_DEBUG_INFO: Decrypted message completed 
+SECURE_MSG_DEBUG_INFO: Decrypted message: 
+
+Son pruebas de como se transmiten los mensajes
+
+SECURE_MSG_DEBUG_INFO: Finished 
+SECURE_MSG_DEBUG_INFO: This is the encrypted message with CRC 
+74980020241c01202f650100e01b0120cb610100241c01202f65010053000000f7650100
+
+SECURE_MSG_DEBUG_INFO: Getting body message bytes 
+SECURE_MSG_DEBUG_INFO: Getting CRC bytes 
+SECURE_MSG_DEBUG_INFO: Convert CRC bytes from the message to int 
+SECURE_MSG_DEBUG_INFO: Calculating CRC32
+SECURE_MSG_DEBUG_INFO: Checksum comparison
+SECURE_MSG_DEBUG_INFO: calculated checksum tx 2334665060 checksum bytes 8b282964, Original checksum tx 2334665060 checksum bytes 8b282964 
+SECURE_MSG_DEBUG_INFO: Checksum OK! Decrypting message...
+SECURE_MSG_DEBUG_INFO: Decrypting buffer on CBC mode...
+SECURE_MSG_DEBUG_INFO: Decrypted message completed 
+SECURE_MSG_DEBUG_INFO: Decrypted message: 
+
+Y esta funcionando bien 
+
+SECURE_MSG_DEBUG_INFO: Finished 
+SECURE_MSG_DEBUG_INFO: This is the encrypted message with CRC 
+74980020241c01202f650100e01b0120cb610100241c01202f6501000000000000000000
+
+SECURE_MSG_DEBUG_INFO: Getting body message bytes 
+SECURE_MSG_DEBUG_INFO: Getting CRC bytes 
+SECURE_MSG_DEBUG_INFO: Convert CRC bytes from the message to int 
+SECURE_MSG_DEBUG_INFO: Calculating CRC32
+SECURE_MSG_DEBUG_INFO: Checksum comparison
+SECURE_MSG_DEBUG_INFO: calculated checksum tx 2721361672 checksum bytes a234af08, Original checksum tx 2721361672 checksum bytes a234af08 
+SECURE_MSG_DEBUG_INFO: Checksum OK! Decrypting message...
+SECURE_MSG_DEBUG_INFO: Decrypting buffer on CBC mode...
+SECURE_MSG_DEBUG_INFO: Decrypted message completed 
+SECURE_MSG_DEBUG_INFO: Decrypted message: 
+
+Esta es la evidencia 
+
+SECURE_MSG_DEBUG_INFO: Finished 
+
+SECURE_MSG_DEBUG_INFO: Waiting for new connection 
