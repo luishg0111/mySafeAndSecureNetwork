@@ -1,8 +1,8 @@
 #Implementation of a Safe and Secure layer over TCP IP
 #It applies AES128 and CRC32
 import socket     # The TCP/IP Sockets module 
-import binascii   # For CRC32 
-from Crypto.Cipher import AES # For AES128
+import binascii   # For CRC32 pyt
+from Cryptodome.Cipher import AES # For AES128
 
 
 ###############################################################################
