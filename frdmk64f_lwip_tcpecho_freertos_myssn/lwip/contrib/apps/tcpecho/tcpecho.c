@@ -37,6 +37,8 @@
 
 #include "lwip/sys.h"
 #include "lwip/api.h"
+
+#include "secure_msg.h"
 /*-----------------------------------------------------------------------------------*/
 static void 
 tcpecho_thread(void *arg)
@@ -52,42 +54,57 @@ tcpecho_thread(void *arg)
   netconn_bind(conn, IP6_ADDR_ANY, 7);
 #else /* LWIP_IPV6 */
   conn = netconn_new(NETCONN_TCP);
-  netconn_bind(conn, IP_ADDR_ANY, 7);
+  netconn_bind(conn, IP_ADDR_ANY, 10000);
 #endif /* LWIP_IPV6 */
   LWIP_ERROR("tcpecho: invalid conn", (conn != NULL), return;);
 
+  /*TEST AES CRC FUNCTIONS BEFORE TO ESTABLISH THE CONNECTION*/
+  //v_aescrc_test_task();
   /* Tell connection to go into listening mode. */
   netconn_listen(conn);
 
-  while (1) {
+  while(1)
+  {
+	  PRINTF("\n\nSECURE_MSG_DEBUG_INFO: Waiting for new connection \r\n");
+      /* Grab new connection. */
+      err = netconn_accept(conn, &newconn);
+      /*printf("accepted new connection %p\n", newconn);*/
+      /* Process the new connection. */
+      if (err == ERR_OK)
+      {
+        struct netbuf *buf;
+        void *data;
+        u16_t len;
+        T_MESSAGGES t_new_msg;
 
-    /* Grab new connection. */
-    err = netconn_accept(conn, &newconn);
-    /*printf("accepted new connection %p\n", newconn);*/
-    /* Process the new connection. */
-    if (err == ERR_OK) {
-      struct netbuf *buf;
-      void *data;
-      u16_t len;
-      
-      while ((err = netconn_recv(newconn, &buf)) == ERR_OK) {
-        /*printf("Recved\n");*/
-        do {
-             netbuf_data(buf, &data, &len);
-             err = netconn_write(newconn, data, len, NETCONN_COPY);
-#if 0
-            if (err != ERR_OK) {
-              printf("tcpecho: netconn_write: error \"%s\"\n", lwip_strerr(err));
-            }
-#endif
-        } while (netbuf_next(buf) >= 0);
-        netbuf_delete(buf);
+        PRINTF("SECURE_MSG_DEBUG_INFO: Connection Accepted. Waiting for receive messages\r\n");
+
+        while ((err = netconn_recv(newconn, &buf)) == ERR_OK)
+        {
+        	/*This function is used to obtain a pointer to and the length of a block of data in the netbuf buf.*/
+            netbuf_data(buf, &data, &len);
+            t_new_msg.ui8_msg = data;
+            t_new_msg.t_padded_len = len;
+
+            v_recv_cypher_message(t_new_msg);
+            do
+            {
+              netbuf_data(buf, &data, &len);
+              err = netconn_write(newconn, data, len, NETCONN_COPY);
+
+  #if 0
+              if (err != ERR_OK) {
+                printf("tcpecho: netconn_write: error \"%s\"\n", lwip_strerr(err));
+              }
+  #endif
+            }while (netbuf_next(buf) >= 0);
+            netbuf_delete(buf);
+        }
+        /*printf("Got EOF, looping\n");*/
+        /* Close connection and discard connection identifier. */
+        netconn_close(newconn);
+        netconn_delete(newconn);
       }
-      /*printf("Got EOF, looping\n");*/ 
-      /* Close connection and discard connection identifier. */
-      netconn_close(newconn);
-      netconn_delete(newconn);
-    }
   }
 }
 /*-----------------------------------------------------------------------------------*/
