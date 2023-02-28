@@ -38,7 +38,25 @@
 #include "lwip/sys.h"
 #include "lwip/api.h"
 
-#include "secure_msg.h"
+#include "secure_msg/secure_msg.h"
+
+/*******************************************************************************
+ * Definitions
+ ******************************************************************************/
+/* IP address configuration. */
+#ifndef clientIP_ADDR0
+#define clientIP_ADDR0 192
+#endif
+#ifndef clientIP_ADDR1
+#define clientIP_ADDR1 168
+#endif
+#ifndef clientIP_ADDR2
+#define clientIP_ADDR2 0
+#endif
+#ifndef clientIP_ADDR3
+#define clientIP_ADDR3 100
+#endif
+
 /*-----------------------------------------------------------------------------------*/
 static void 
 tcpecho_thread(void *arg)
@@ -76,6 +94,7 @@ tcpecho_thread(void *arg)
         void *data;
         u16_t len;
         T_MESSAGGES t_new_msg;
+        const char *message1 = "Message received successfully";
 
         PRINTF("SECURE_MSG_DEBUG_INFO: Connection Accepted. Waiting for receive messages\r\n");
 
@@ -86,16 +105,21 @@ tcpecho_thread(void *arg)
             t_new_msg.ui8_msg = data;
             t_new_msg.t_padded_len = len;
 
+            /*Use function to evaluate message for decrypting */
             v_recv_cypher_message(t_new_msg);
             do
             {
-              netbuf_data(buf, &data, &len);
-              err = netconn_write(newconn, data, len, NETCONN_COPY);
+            	/*Use function to encrypt the message response  */
+            	t_new_msg = v_write_cypher_message((uint8_t*) message1);
+            	data =  t_new_msg.ui8_msg;
+            	len = t_new_msg.t_padded_len;
+            	netbuf_data(buf, &data, &len);
+            	err = netconn_write(newconn, data, len, NETCONN_COPY);
 
   #if 0
-              if (err != ERR_OK) {
-                printf("tcpecho: netconn_write: error \"%s\"\n", lwip_strerr(err));
-              }
+            	if (err != ERR_OK) {
+            		printf("tcpecho: netconn_write: error \"%s\"\n", lwip_strerr(err));
+            	}
   #endif
             }while (netbuf_next(buf) >= 0);
             netbuf_delete(buf);
@@ -107,11 +131,114 @@ tcpecho_thread(void *arg)
       }
   }
 }
+
+static void
+tcpecho_client_thread(void *arg)
+{
+  struct netconn *conn;
+  err_t err;
+  u8_t max_iterations = 8;
+  /* IP address configuration. */
+  ip4_addr_t server_addr;
+
+  IP4_ADDR(&server_addr, clientIP_ADDR0, clientIP_ADDR1, clientIP_ADDR2, clientIP_ADDR3);
+  LWIP_UNUSED_ARG(arg);
+
+  /* Bind connection to well known port number 7. */
+#if LWIP_IPV6
+  conn = netconn_new(NETCONN_TCP_IPV6);
+  netconn_bind(conn, IP6_ADDR_ANY, 7);
+#else /* LWIP_IPV6 */
+  /* Create a new connection identifier. */
+  conn = netconn_new(NETCONN_TCP);
+
+  LWIP_ERROR("tcpecho: invalid conn", (conn != NULL), return;);
+
+  err = netconn_connect(conn, &server_addr, 10000);
+  if(err == ERR_OK)
+  {
+	  PRINTF("Server Connected \n\r");
+  }
+  else
+  {
+	  PRINTF("Connection error \"%s\"\n\r", lwip_strerr(err));
+  }
+#endif /* LWIP_IPV6 */
+
+  while (max_iterations--)
+  {
+      struct netbuf *buf;
+      void *data;
+      u16_t len;
+      T_MESSAGGES t_new_msg;
+      const char *messages[8] = {"Mensaje de prueba 123",
+    		  	  	  	  	  	 "Otro mensaje de prueba 234",
+								 "Mas pruebas 567",
+								 "Mas pruebas 890",
+								 "Seguimos probando",
+								 "Esto sigue siendo una prueba",
+								 "Hola, yo de nuevo",
+								 "Si, 8 mensajes de prueba"};
+/*
+      const char *message2 = "Otro mensaje de prueba 234";
+      const char *message3 = "Mas pruebas 567";
+      const char *message4 = "Mas pruebas 890";
+      const char *message5 = "Seguimos probando";
+      const char *message6 = "Esto sigue siendo una prueba";
+      const char *message7 = "Hola, yo de nuevo";
+      const char *message8 = "Si, 8 mensajes de prueba";
+*/
+
+      t_new_msg = v_write_cypher_message((uint8_t*) messages[max_iterations-1]);
+	  data =  t_new_msg.ui8_msg;
+	  len = t_new_msg.t_padded_len;
+
+      if((err = netconn_write(conn, data, len, NETCONN_COPY)) != ERR_OK)
+      {
+    	  PRINTF("tcpecho: netconn_write: error \"%s\"\n", lwip_strerr(err));
+    	  break;
+      }
+
+      if((err = netconn_recv(conn, &buf)) != ERR_OK)
+      {
+    	  PRINTF("tcpecho: netconn_recv: error \"%s\"\n", lwip_strerr(err));
+    	  break;
+      }
+      else
+      {
+          t_new_msg.ui8_msg = data;
+          t_new_msg.t_padded_len = len;
+          v_recv_cypher_message(t_new_msg);
+      }
+
+      PRINTF("Data Received:");
+      do
+      {
+    	  netbuf_data(buf, &data, &len);
+    	  char* ptrdata = (char*)data;
+    	  for(int index = 0; index < len; index++)
+    	  {
+    		  PRINTF("%c", ptrdata[index]);
+    	  }
+      }while (netbuf_next(buf) >= 0);
+      PRINTF("\n\r");
+      netbuf_delete(buf);
+
+      vTaskDelay(1000/portTICK_PERIOD_MS);
+      /*printf("Got EOF, looping\n");*/
+  }
+  /* Close connection and discard connection identifier. */
+  netconn_close(conn);
+  netconn_delete(conn);
+
+  vTaskDelete(NULL);
+}
 /*-----------------------------------------------------------------------------------*/
 void
 tcpecho_init(void)
 {
-  sys_thread_new("tcpecho_thread", tcpecho_thread, NULL, DEFAULT_THREAD_STACKSIZE, DEFAULT_THREAD_PRIO);
+	sys_thread_new("tcpecho_thread", tcpecho_thread, NULL, DEFAULT_THREAD_STACKSIZE, DEFAULT_THREAD_PRIO);
+	//sys_thread_new("tcpecho_thread", tcpecho_client_thread, NULL, DEFAULT_THREAD_STACKSIZE, DEFAULT_THREAD_PRIO);
 }
 /*-----------------------------------------------------------------------------------*/
 

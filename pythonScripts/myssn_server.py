@@ -3,7 +3,7 @@
 import myssn
 import sys
 
-SERVER_ADDRESS = 'localhost'
+SERVER_ADDRESS = "192.168.0.100"
 
 server = myssn.server_create(SERVER_ADDRESS)
 
