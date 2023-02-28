@@ -1,0 +1,51 @@
+myssn INFO: connecting to 192.168.0.102 port 10000
+$ Hola
+myssn INFO: sending data: b'Hola'
+myssn INFO: encrypted message: b'Q\x18\xd7\x1fq\xee\xedQ-\xa5\x99/,)\x8f\x00'
+myssn INFO: tx crc32 = 1363261323, crc bytes = b'\x8b\xb7AQ'
+myssn DATA: b'Hola'
+DATA: b'Hola'
+$ ESta es una segunda prueba
+myssn INFO: sending data: b'ESta es una segunda prueba'
+myssn INFO: encrypted message: b'3\xff4\\g\x97\x9f\xf3\xe0\xe18\x8f\xd5\xb6!\x01/K\x85\xa6W6\xe2\x9f\x16\xe3\x87\xa3U\x08\xf1\xc6'
+myssn INFO: tx crc32 = 437842752, crc bytes = b'@\xf3\x18\x1a'
+myssn DATA: b'ESta es una segunda prueba'
+DATA: b'ESta es una segunda prueba'
+$ en este caso
+myssn INFO: sending data: b'en este caso'
+myssn INFO: encrypted message: b'\x05\\\xd5\xff\x14\xca\xe2n\xb2*I\x08t\x1d\xc7|'
+myssn INFO: tx crc32 = 1636295735, crc bytes = b'7\xe4\x87a'
+myssn DATA: b'en este caso'
+DATA: b'en este caso'
+$ se esta probando que el servidor  
+myssn INFO: sending data: b'se esta probando que el servidor '
+myssn INFO: encrypted message: b'<Q:\xc2\xf0\x9d\xeff\x7f[\xcf\xcf\xe9\xe3\x14K\xd5\xf3\xabC\xdf\x00W<\x029\xc0\xd6{\x1f\x1bO\xd0\xc87m\xd8\xe2\xa5\x95\x1d\xbcnt[\x8dQ\xde'
+myssn INFO: tx crc32 = 3566638671, crc bytes = b'O\x96\x96\xd4'
+myssn DATA: b'se esta probando que el servidor '
+DATA: b'se esta probando que el servidor '
+$ escriba tambien el mensaje encriptado despues de recibir un mensaje del cliente 
+myssn INFO: sending data: b'escriba tambien el mensaje encriptado despues de recibir un mensaje del cliente '
+myssn INFO: encrypted message: b'\xaf\x9a\xbd\x16\xa7\xa6\x12\x9a\xc4\xe3\xa0\xcb\x9fla\xe1\xb7\xa8I\xf9\xf3\x8ad)YT\xd2[A\x0e\x10|t\xab\x9a\xe2\xa9E\xf2qy3\x06\x95\xa2\x8e\x88\x1eS\x18\xe6\xf3\x99\xaa\xa3\xc6\x07\xac&R\xa0D\x02\x82IQ\x19\xa7\xe8\xaf[[+\xf0\xb6\xe7\x83\xd3\xab\x11 G\xd1\xdcl\xcd\x92\xe0\x81!$cW\xcd\x9a\x16'
+myssn INFO: tx crc32 = 3801544532, crc bytes = b'T\xf7\x96\xe2'
+myssn DATA: b'escriba tambien el mensaje encriptado despues de recibir un mensaje del cliente '
+DATA: b'escriba tambien el mensaje encriptado despues de recibir un mensaje del cliente '
+$ Prueba
+myssn INFO: sending data: b'Prueba'
+myssn INFO: encrypted message: b'\x91\xe06\xb7\x8cU\xa1e\x9d\x02/\n\x87\x064\x02'
+myssn INFO: tx crc32 = 4294571063, crc bytes = b'7\xf4\xf9\xff'
+myssn DATA: b'Prueba'
+DATA: b'Prueba'
+$ Testing 
+myssn INFO: sending data: b'Testing '
+myssn INFO: encrypted message: b',1\xd9E!\xc9\xe2\x0e\xe1\n\x01\x1f\xc1\x12x\xbf'
+myssn INFO: tx crc32 = 2388584763, crc bytes = b';\xe9^\x8e'
+myssn DATA: b'Testing '
+DATA: b'Testing '
+$ Está funcionando correctamente 
+myssn INFO: sending data: b'Est\xc3\xa1 funcionando correctamente'
+myssn INFO: encrypted message: b'\xf9RA\xcc+\xcf\xdd\x91\x06\xac\xa4\xd7p(\xd86\xf48\xb9\xa9\x917\xa9\xa0N\xe1h\x9d\x85\xd4\xe2\xed'
+myssn INFO: tx crc32 = 3398483811, crc bytes = b'c\xbf\x90\xca'
+myssn DATA: b'Est\xc3\xa1 funcionando correctamente'
+DATA: b'Est\xc3\xa1 funcionando correctamente'
+$ INFO: Client Exception
+INFO: Bye!
