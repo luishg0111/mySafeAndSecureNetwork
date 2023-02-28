@@ -34,7 +34,7 @@ extern uint8_t aui8_padded_msg[512];
  ******************************************************************************/
 void v_aescrc_test_task( void );
 void v_recv_cypher_message(T_MESSAGGES t_data);
-T_MESSAGGES v_write_cypher_message(uint8_t* pui8_data);
+T_MESSAGGES t_write_cypher_message(uint8_t* pui8_data);
 T_MESSAGGES t_encrypt_message_AES(uint8_t* pui8_data);
 T_MESSAGGES t_decrypt_message_AES(uint8_t* pui8_data);
 

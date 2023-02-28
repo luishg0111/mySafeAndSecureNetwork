@@ -268,7 +268,7 @@ void v_recv_cypher_message(T_MESSAGGES t_data)
 
 }
 
-T_MESSAGGES v_write_cypher_message(uint8_t* pui8_data)
+T_MESSAGGES t_write_cypher_message(uint8_t* pui8_data)
 {
 	/*Definition of variables*/
 	uint8_t ui8_Counter = 0;
